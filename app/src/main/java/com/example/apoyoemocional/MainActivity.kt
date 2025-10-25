@@ -1,6 +1,5 @@
 package com.example.apoyoemocional
 
-import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -39,7 +38,7 @@ class MainActivity : ComponentActivity() {
                 val perfilViewModel: PerfilViewModel = viewModel()
                 val inicioViewModel: InicioViewModel = viewModel()
                 val emocionViewModel: EmocionViewModel = viewModel()
-                val videoUri = Uri.parse("https://www.youtube.com/watch?v=adpR2UQTElk")
+                //val videoUri = Uri.parse("https://www.youtube.com/watch?v=adpR2UQTElk")
                 val respiraViewModel: RespiraViewModel = viewModel()
                 val recursosViewModel: RecursosViewModel = viewModel()
                 val recFacialViewModel: RecFacialViewModel = viewModel()
