@@ -18,9 +18,11 @@ import java.nio.charset.StandardCharsets
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EmocionScreen(navController: NavController, viewModel: EmocionViewModel, nombreRegistro: String) {
-    LaunchedEffect(nombreRegistro) {
-        viewModel.actualizarNombre(nombreRegistro)
+fun EmocionScreen(navController: NavController, viewModel: EmocionViewModel, nombre: String) {
+    // CORRECCIÓN CLAVE: Usamos el argumento 'nombre' para inicializar el ViewModel
+    LaunchedEffect(nombre) {
+        // Actualizamos el nombre de usuario en el ViewModel con el argumento recibido de la navegación.
+        viewModel.actualizarNombre(nombre)
     }
 
     val estado by viewModel.estado.collectAsState()
@@ -58,16 +60,16 @@ fun EmocionScreen(navController: NavController, viewModel: EmocionViewModel, nom
                 .padding(innerPadding)
                 .padding(16.dp)
         ) {
-            Text(text = estado.descripcion, style = MaterialTheme.typography.bodyLarge)
-            Spacer(modifier = Modifier.height(26.dp))
-
             Column(
                 modifier = Modifier
-                    .padding(innerPadding)
-                    .padding(16.dp)
                     .fillMaxSize(),
                 verticalArrangement = Arrangement.Top
             ) {
+                // Aquí usamos la descripción del estado (si es necesario)
+                Text(text = estado.descripcion, style = MaterialTheme.typography.bodyLarge)
+                Spacer(modifier = Modifier.height(26.dp))
+
+                // Muestra "Hola, [Nombre del Usuario]"
                 Text(
                     text = "Hola, ${estado.nombreUsuario}",
                     style = MaterialTheme.typography.headlineSmall

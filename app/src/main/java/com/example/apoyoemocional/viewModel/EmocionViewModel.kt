@@ -10,6 +10,7 @@ class EmocionViewModel  : ViewModel() {
     private val _estado = MutableStateFlow(EmocionUIState())
     val estado: StateFlow<EmocionUIState> = _estado
 
+    // ARREGLO CLAVE: La función debe esperar un parámetro de tipo String
     fun actualizarNombre(nombre: String) {
         _estado.value = _estado.value.copy(nombreUsuario = nombre)
     }
@@ -21,6 +22,7 @@ class EmocionViewModel  : ViewModel() {
     fun guardarEmocion(): Boolean {
         val emocionValida = _estado.value.emocionTexto.isNotBlank()
         if (emocionValida) {
+            // Lógica para guardar la emoción (si se implementara la persistencia)
         }
         return emocionValida
     }
