@@ -11,14 +11,25 @@ import com.example.apoyoemocional.viewModel.EmocionViewModel
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.sp
+import kotlinx.coroutines.launch
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EmocionScreen(navController: NavController, viewModel: EmocionViewModel) {
+fun EmocionScreen(navController: NavController, viewModel: EmocionViewModel, nombreRegistro: String) {
+    LaunchedEffect(nombreRegistro) {
+        viewModel.actualizarNombre(nombreRegistro)
+    }
+
     val estado by viewModel.estado.collectAsState()
     val fondoPastel = Color(0xFFE3F2FD) // Azul cielo pastel
+    val snackbarHostState = remember { SnackbarHostState() }
+    val scope = rememberCoroutineScope()
 
     Scaffold(
+        snackbarHost = {SnackbarHost(snackbarHostState)},
         topBar = {
             CenterAlignedTopAppBar(
                 title = {
@@ -82,8 +93,28 @@ fun EmocionScreen(navController: NavController, viewModel: EmocionViewModel) {
 
                 Spacer(modifier = Modifier.height(24.dp))
 
-                Button(onClick = {
-                }) {
+                Button(
+                    onClick = {
+                        val isSaved = viewModel.guardarEmocion()
+                        if (isSaved) {
+                            val nombreEncoded = URLEncoder.encode(
+                                estado.nombreUsuario,
+                                StandardCharsets.UTF_8.toString()
+                            )
+                            val emocionEncoded = URLEncoder.encode(
+                                estado.emocionTexto,
+                                StandardCharsets.UTF_8.toString()
+                            )
+
+                            navController.navigate("emocionGuardada/$nombreEncoded/$emocionEncoded")
+                        } else {
+                            scope.launch {
+                                snackbarHostState.showSnackbar("Por favor, escribe tus emociones antes de guardar.")
+                            }
+                        }
+                    },
+                    modifier = Modifier.fillMaxWidth()
+                ){
                     Text("Guardar")
                 }
                 Spacer(modifier = Modifier.height(24.dp))
@@ -102,6 +133,8 @@ fun EmocionScreen(navController: NavController, viewModel: EmocionViewModel) {
 
     }
 }
+
+
 
 
 //val videoUri = Uri.parse("https://www.example.com/video.mp4") // Usa tu URL o archivo local

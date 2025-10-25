@@ -17,4 +17,11 @@ class EmocionViewModel  : ViewModel() {
     fun actualizarEmocion(texto: String) {
         _estado.value = _estado.value.copy(emocionTexto = texto)
     }
+
+    fun guardarEmocion(): Boolean {
+        val emocionValida = _estado.value.emocionTexto.isNotBlank()
+        if (emocionValida) {
+        }
+        return emocionValida
+    }
 }

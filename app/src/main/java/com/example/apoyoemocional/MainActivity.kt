@@ -12,6 +12,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.apoyoemocional.ui.theme.ApoyoEmocionalTheme
+import com.example.apoyoemocional.view.EmocionGuardadaScreen // IMPORTAMOS LA NUEVA VISTA
 import com.example.apoyoemocional.view.EmocionScreen
 import com.example.apoyoemocional.view.FormularioScreen
 import com.example.apoyoemocional.view.PaginaInicio
@@ -26,7 +27,8 @@ import com.example.apoyoemocional.viewModel.UsuarioViewModel
 import com.example.apoyoemocional.viewModel.PerfilViewModel
 import com.example.apoyoemocional.viewModel.RecursosViewModel
 import com.example.apoyoemocional.viewModel.RespiraViewModel
-
+import java.net.URLDecoder
+import java.nio.charset.StandardCharsets
 
 
 class MainActivity : ComponentActivity() {
@@ -45,7 +47,6 @@ class MainActivity : ComponentActivity() {
                 val recursosViewModel: RecursosViewModel = viewModel()
 
 
-
                 NavHost(navController = navController, startDestination = "inicio") {
                     composable("inicio") {
                         PaginaInicio(navController, inicioViewModel)
@@ -60,22 +61,35 @@ class MainActivity : ComponentActivity() {
                     composable("resumen") {
                         ResumenScreen(navController, usuarioViewModel)
                     }
+
                     composable("perfil") {
                         PerfilScreen(navController, perfilViewModel)
                     }
-                    composable("emocion") {
-                        EmocionScreen(navController, emocionViewModel)
+
+                    // RUTA ACTUALIZADA: Recibimos el nombre del usuario como argumento
+                    composable("emocion/{nombreUsuario}") { backStackEntry ->
+                        val nombre = backStackEntry.arguments?.getString("nombreUsuario") ?: "Invitado"
+                        EmocionScreen(navController, emocionViewModel, nombre)
                     }
+
+                    // NUEVA RUTA: Recibimos el nombre y el texto de la emoción
+                    composable("emocionGuardada/{nombreUsuario}/{emocionTexto}") { backStackEntry ->
+                        val nombre = backStackEntry.arguments?.getString("nombreUsuario") ?: "Usuario Desconocido"
+                        val emocion = backStackEntry.arguments?.getString("emocionTexto") ?: "No se registró emoción."
+                        // Es importante decodificar la emoción porque fue codificada en EmocionScreen
+                        val emocionDecoded = URLDecoder.decode(emocion, StandardCharsets.UTF_8.toString())
+
+                        EmocionGuardadaScreen(navController, nombre, emocionDecoded)
+                    }
+
                     composable("recursos") {
                         RecursosScreen(navController, recursosViewModel)
                     }
                     composable("Respira") {
                         RespiraScreen(navController = navController, viewModel = respiraViewModel)
                     }
-
                 }
             }
-
         }
     }
 }

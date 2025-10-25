@@ -44,7 +44,7 @@ fun ResumenScreen(navController: NavController, viewModel: UsuarioViewModel) {
         Text("¿Términos Aceptados?: ${if (estado.aceptaTerminos) "Aceptados" else "Declinados"}")
 
         Button(
-            onClick = { navController.navigate("perfil") },
+            onClick = { navController.navigate("emocion/${estado.nombre}") },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 24.dp)
