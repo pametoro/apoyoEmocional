@@ -60,8 +60,9 @@ class MainActivity : ComponentActivity() {
                         ResumenScreen(navController, usuarioViewModel)
                     }
                     composable("reconocimiento") {
-                        RecFacialScreen(viewModel = recFacialViewModel)
+                        RecFacialScreen(navController = navController, viewModel = recFacialViewModel)
                     }
+
                     composable("perfil") {
                         PerfilScreen(navController, perfilViewModel)
                     }

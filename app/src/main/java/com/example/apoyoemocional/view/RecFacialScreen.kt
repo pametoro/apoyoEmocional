@@ -1,5 +1,6 @@
 package com.example.apoyoemocional.view
 
+import android.R.attr.navigationIcon
 import android.graphics.BitmapFactory
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
@@ -12,13 +13,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.apoyoemocional.viewModel.RecFacialViewModel
 import com.google.mlkit.vision.common.InputImage
 import com.example.apoyoemocional.R
-
 @Composable
-fun RecFacialScreen(viewModel: RecFacialViewModel) {
+fun RecFacialScreen(navController: NavController, viewModel: RecFacialViewModel) {
     val faces by viewModel.faces.collectAsState()
     val error by viewModel.error.collectAsState()
     val context = LocalContext.current
@@ -30,10 +34,30 @@ fun RecFacialScreen(viewModel: RecFacialViewModel) {
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        // 🔙 Botón de retroceso
+        Button(
+            onClick = { navController.popBackStack() },
+            modifier = Modifier.align(Alignment.Start)
+        ) {
+            Text("<")
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
         Text("Rostros detectados: ${faces.size}")
         error?.let {
             Text("Error: $it", color = Color.Red)
         }
+
+        Spacer(modifier = Modifier.height(32.dp))
+
+        Text(
+            text = "Alinea tu rostro dentro del círculo para iniciar el reconocimiento",
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Medium,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth()
+        )
 
         Spacer(modifier = Modifier.height(16.dp))
 
@@ -59,11 +83,9 @@ fun RecFacialScreen(viewModel: RecFacialViewModel) {
                 val image = InputImage.fromBitmap(bitmap, 0)
                 viewModel.processImage(image)
             },
-            modifier = Modifier.align(Alignment.CenterHorizontally) // Centra el botón dentro del Column
+            modifier = Modifier.align(Alignment.CenterHorizontally)
         ) {
             Text("Detectar rostro")
         }
     }
 }
-
-

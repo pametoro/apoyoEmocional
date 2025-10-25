@@ -6,12 +6,12 @@ import kotlinx.coroutines.flow.StateFlow
 import com.example.apoyoemocional.model.EmocionUIState
 
 
-class EmocionViewModel : ViewModel() {
+class EmocionViewModel  : ViewModel() {
     private val _estado = MutableStateFlow(EmocionUIState())
     val estado: StateFlow<EmocionUIState> = _estado
 
-    fun actualizarNombre(nombre: String) {
-        _estado.value = _estado.value.copy(nombreUsuario = nombre)
+    fun actualizarNombre(nombre: Nothing?) {
+        _estado.value = _estado.value.copy(nombreUsuario = nombre.toString())
     }
 
     fun actualizarEmocion(texto: String) {

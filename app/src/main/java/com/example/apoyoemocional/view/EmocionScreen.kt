@@ -18,7 +18,8 @@ import java.nio.charset.StandardCharsets
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EmocionScreen(navController: NavController, viewModel: EmocionViewModel, nombreRegistro: String) {
+fun EmocionScreen(navController: NavController, viewModel: EmocionViewModel) {
+    val nombreRegistro = null
     LaunchedEffect(nombreRegistro) {
         viewModel.actualizarNombre(nombreRegistro)
     }
