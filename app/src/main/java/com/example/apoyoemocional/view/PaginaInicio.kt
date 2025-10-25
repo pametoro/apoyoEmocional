@@ -51,7 +51,7 @@ fun PaginaInicio(navController: NavController, viewModel: InicioViewModel) {
                     contentDescription = "Logo de Apoyo Emocional",
                     modifier = Modifier
                         .size(280.dp)
-                        .padding(bottom = 25.dp)
+                        .padding(bottom = 8.dp)
                 )
 
                 Text(text = estado.descripcion, style = MaterialTheme.typography.bodyLarge,fontSize = 25.sp)
@@ -70,8 +70,11 @@ fun PaginaInicio(navController: NavController, viewModel: InicioViewModel) {
                     }) {
                         Text("Ir al perfil")
 
-
                     }
+                    Button(onClick = { navController.navigate("reconocimiento") }) {
+                        Text("Iniciar reconocimiento facial")
+                    }
+
                 }
             }
         }
