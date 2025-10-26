@@ -9,12 +9,9 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.ui.unit.dp
 import com.example.apoyoemocional.viewModel.RecursosViewModel
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.sp
 
@@ -62,6 +59,7 @@ fun RecursosScreen(navController: NavController, viewModel: RecursosViewModel) {
                 ) {
                     Text(
                         text = listaConsejos.value[index].texto,
+                        color = Color.DarkGray,
                         modifier = Modifier.padding(20.dp),
                         style = MaterialTheme.typography.bodyLarge
                     )
@@ -73,6 +71,7 @@ fun RecursosScreen(navController: NavController, viewModel: RecursosViewModel) {
 
                 Text(
                     text = "Si en este momento sientes que la angustia te supera, regálate  un respiro mira el video y acompáñate en calma.",
+                    color = Color.DarkGray,
                     style = MaterialTheme.typography.bodyLarge.copy(fontSize = 24.sp)
                 )
 

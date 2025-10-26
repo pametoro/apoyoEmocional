@@ -62,6 +62,7 @@ fun RespiraScreen(navController: NavController, viewModel: RespiraViewModel) {
 
             Text(
                 text = "Respira profundamente y sigue las instrucciones del video",
+                color = Color.DarkGray,
                 style = MaterialTheme.typography.bodyLarge,
                 fontSize = 25.sp
             )

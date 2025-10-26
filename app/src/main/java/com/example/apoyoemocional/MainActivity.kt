@@ -1,35 +1,35 @@
 package com.example.apoyoemocional
 
+import RecFacialViewModel
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.apoyoemocional.ui.theme.ApoyoEmocionalTheme
 import com.example.apoyoemocional.view.EmocionGuardadaScreen
 import com.example.apoyoemocional.view.EmocionScreen
 import com.example.apoyoemocional.view.FormularioScreen
 import com.example.apoyoemocional.view.PaginaInicio
-import com.example.apoyoemocional.view.RecFacialScreen // IMPORTADA: Nueva pantalla de Reconocimiento Facial
+import com.example.apoyoemocional.view.RecFacialScreen
 import com.example.apoyoemocional.view.RecursosScreen
 import com.example.apoyoemocional.view.RespiraScreen
 import com.example.apoyoemocional.view.ResumenScreen
 import com.example.apoyoemocional.view.screen.PerfilScreen
 import com.example.apoyoemocional.viewModel.EmocionViewModel
 import com.example.apoyoemocional.viewModel.InicioViewModel
-import com.example.apoyoemocional.viewModel.UsuarioViewModel
 import com.example.apoyoemocional.viewModel.PerfilViewModel
-import com.example.apoyoemocional.viewModel.RecFacialViewModel // IMPORTADO: Nuevo ViewModel
 import com.example.apoyoemocional.viewModel.RecursosViewModel
 import com.example.apoyoemocional.viewModel.RespiraViewModel
+import com.example.apoyoemocional.viewModel.UsuarioViewModel
 import java.net.URLDecoder
 import java.nio.charset.StandardCharsets
-import androidx.compose.runtime.collectAsState
-import androidx.navigation.NavType
-import androidx.navigation.navArgument
 
 
 class MainActivity : ComponentActivity() {

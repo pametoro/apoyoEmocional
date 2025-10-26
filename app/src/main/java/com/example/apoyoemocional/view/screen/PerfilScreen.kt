@@ -117,11 +117,12 @@ fun PerfilScreen(navController: NavController, viewModel: PerfilViewModel, nombr
                 }
             }) {
                 Text("Toma una foto con la cámara")
+
             }
             Spacer(modifier = Modifier.height(10.dp))
             Button(
                 onClick = {
-                    val nombre = "Pamela"
+                    val nombre = "Invitado"
                     navController.navigate("emocion/$nombre")
                 }
             ) {

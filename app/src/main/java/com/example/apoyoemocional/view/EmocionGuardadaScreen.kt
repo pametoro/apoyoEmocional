@@ -51,6 +51,7 @@ fun EmocionGuardadaScreen(navController: NavController, nombreUsuario: String, e
             // Nombre del usuario
             Text(
                 text = "Hola, ${nombreUsuario}",
+                color = Color.DarkGray,
                 style = MaterialTheme.typography.titleMedium
             )
 
@@ -66,11 +67,12 @@ fun EmocionGuardadaScreen(navController: NavController, nombreUsuario: String, e
                     Text(
                         text = "mis pensamientos:",
                         style = MaterialTheme.typography.labelLarge,
-                        color = Color.Gray
+                        color = Color.DarkGray
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
                         text = emocionTexto,
+                        color = Color.DarkGray,
                         style = MaterialTheme.typography.bodyLarge,
                         modifier = Modifier.fillMaxWidth()
                     )

@@ -11,9 +11,11 @@ import androidx.navigation.NavController
 import com.example.apoyoemocional.viewModel.InicioViewModel
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.sp
 import com.example.apoyoemocional.R
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -32,7 +34,6 @@ fun PaginaInicio(navController: NavController, viewModel: InicioViewModel) {
     ) { innerPadding ->
         Box(
             modifier = Modifier
-
                 .fillMaxSize()
                 .background(fondoPastel)
                 .padding(innerPadding)
@@ -42,7 +43,8 @@ fun PaginaInicio(navController: NavController, viewModel: InicioViewModel) {
                 modifier = Modifier
                     .padding(innerPadding)
                     .padding(16.dp)
-                    .fillMaxSize(),
+                    .fillMaxSize()
+                     .verticalScroll(rememberScrollState()),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
@@ -53,37 +55,30 @@ fun PaginaInicio(navController: NavController, viewModel: InicioViewModel) {
                         .size(280.dp)
                         .padding(bottom = 8.dp)
                 )
-
                 Text(
                     text = estado.descripcion,
-                    style = MaterialTheme.typography.bodyLarge,
-                    fontSize = 25.sp
+                    color = Color.DarkGray, // aca se cambia el color
+                    modifier = Modifier.padding(30.dp)
                 )
-
-                Spacer(modifier = Modifier.height(24.dp))
-
+                Spacer(modifier = Modifier.height(10.dp))
                 if (estado.mostrarBoton) {
                     Button(onClick = {
                         navController.navigate("FormularioScreen")
                     }) {
                         Text("Registrate")
                     }
-                    Spacer(modifier = Modifier.height(16.dp))
-
+                    Spacer(modifier = Modifier.height(10.dp))
                     Button(
                         onClick = {
                         navController.navigate("perfil/Pamela")
-
                     }) {
                         Text("Ir al perfil")
                         }
-                    Spacer(modifier = Modifier.height(16.dp))
-
+                    Spacer(modifier = Modifier.height(10.dp))
                     Button(
                         onClick = { navController.navigate("reconocimiento") }) {
                             Text("Iniciar reconocimiento facial")
                         }
-
                     }
                 }
             }

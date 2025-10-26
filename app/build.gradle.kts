@@ -42,13 +42,28 @@ android {
 }
 
 dependencies {
-    implementation("io.coil-kt:coil-compose:2.4.0")
-    implementation("androidx.compose.material3:material3:1.2.0")
+    implementation("androidx.compose.material3:material3:1.4.0")
     implementation("androidx.compose.ui:ui:1.5.1")
+    implementation("io.coil-kt:coil-compose:2.4.0")
     implementation("androidx.media3:media3-exoplayer:1.1.1")
     implementation("androidx.media3:media3-ui:1.1.1")
+    implementation("androidx.compose.material:material-icons-extended:1.5.1")
+    implementation("androidx.compose.material3:material3:1.2.0")
+
+
+
+    // ML Kit
     implementation("com.google.mlkit:face-detection:16.1.5")
 
+    // CameraX
+    implementation("androidx.camera:camera-camera2:1.3.0")
+    implementation("androidx.camera:camera-lifecycle:1.3.0")
+    implementation("androidx.camera:camera-view:1.3.0")
+
+    // Accompanist Permissions
+    implementation("com.google.accompanist:accompanist-permissions:0.28.0")
+
+    // Otros componentes de Jetpack Compose
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -63,13 +78,11 @@ dependencies {
     implementation(libs.androidx.compose.animation.core.android)
     implementation(libs.androidx.media3.exoplayer)
     implementation(libs.androidx.compose.ui.text)
-    implementation ("com.google.mlkit:face-detection:16.1.5")
-    implementation ("androidx.camera:camera-camera2:1.1.0")
-    implementation ("androidx.camera:camera-lifecycle:1.1.0")
-    implementation ("androidx.camera:camera-view:1.0.0-alpha32")
     implementation(libs.vision.common)
+    implementation(libs.androidx.ui)
+    implementation(libs.play.services.mlkit.face.detection)
 
-
+    // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -77,6 +90,4 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
-
-
 }

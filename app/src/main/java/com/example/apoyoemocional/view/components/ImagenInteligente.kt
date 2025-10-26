@@ -1,13 +1,15 @@
 package com.example.apoyoemocional.view.components
 
+import androidx.compose.material3.Icon
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
+
+
 import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -27,9 +29,9 @@ fun ImagenInteligente(imagenUri: Uri?) {
                 .size(150.dp)
                 .clip(CircleShape)
         )
-    } else {
+    }else {
         Icon(
-            imageVector = Icons.Default.AccountCircle,
+            imageVector = Icons.Filled.AccountCircle,
             contentDescription = "Icono de perfil por defecto",
             tint = Color.Gray,
             modifier = Modifier

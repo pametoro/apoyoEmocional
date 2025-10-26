@@ -67,12 +67,16 @@ fun EmocionScreen(navController: NavController, viewModel: EmocionViewModel, nom
                 verticalArrangement = Arrangement.Top
             ) {
                 // Aquí usamos la descripción del estado (si es necesario)
-                Text(text = estado.descripcion, style = MaterialTheme.typography.bodyLarge)
-                Spacer(modifier = Modifier.height(26.dp))
+                Text(
+                    text = estado.descripcion,
+                    color = Color.DarkGray,
+                    style = MaterialTheme.typography.bodyLarge)
+                    Spacer(modifier = Modifier.height(26.dp))
 
                 // Muestra "Hola, [Nombre del Usuario]"
                 Text(
                     text = "Hola, ${estado.nombreUsuario}",
+                    color = Color.DarkGray,
                     style = MaterialTheme.typography.headlineSmall
                 )
 
@@ -80,7 +84,10 @@ fun EmocionScreen(navController: NavController, viewModel: EmocionViewModel, nom
 
                 Text(
                     text = "¿Cómo te sientes hoy?",
-                    style = MaterialTheme.typography.bodyLarge
+                    color = Color.DarkGray,
+                    style = MaterialTheme.typography.bodyLarge,
+                    fontSize = 16.sp
+
                 )
 
                 Spacer(modifier = Modifier.height(10.dp))
@@ -127,8 +134,6 @@ fun EmocionScreen(navController: NavController, viewModel: EmocionViewModel, nom
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text("Consejos")
-
-
                 }
             }
         }
