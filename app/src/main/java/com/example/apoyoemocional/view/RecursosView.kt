@@ -72,7 +72,7 @@ fun RecursosScreen(navController: NavController, viewModel: RecursosViewModel) {
                 Spacer(modifier = Modifier.height(50.dp))
 
                 Text(
-                    text = "Si en este momento sientes que la angustia te supera, regálate un respiro mira el video y acompáñate en calma.",
+                    text = "Si en este momento sientes que la angustia te supera, regálate  un respiro mira el video y acompáñate en calma.",
                     style = MaterialTheme.typography.bodyLarge.copy(fontSize = 24.sp)
                 )
 

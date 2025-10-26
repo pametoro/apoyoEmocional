@@ -54,7 +54,11 @@ fun PaginaInicio(navController: NavController, viewModel: InicioViewModel) {
                         .padding(bottom = 8.dp)
                 )
 
-                Text(text = estado.descripcion, style = MaterialTheme.typography.bodyLarge,fontSize = 25.sp)
+                Text(
+                    text = estado.descripcion,
+                    style = MaterialTheme.typography.bodyLarge,
+                    fontSize = 25.sp
+                )
 
                 Spacer(modifier = Modifier.height(24.dp))
 
@@ -65,18 +69,24 @@ fun PaginaInicio(navController: NavController, viewModel: InicioViewModel) {
                         Text("Registrate")
                     }
                     Spacer(modifier = Modifier.height(16.dp))
-                    Button(onClick = {
-                        navController.navigate("Emocion")
+
+                    Button(
+                        onClick = {
+                        navController.navigate("perfil/Pamela")
+
                     }) {
                         Text("Ir al perfil")
+                        }
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    Button(
+                        onClick = { navController.navigate("reconocimiento") }) {
+                            Text("Iniciar reconocimiento facial")
+                        }
 
                     }
-                    Button(onClick = { navController.navigate("reconocimiento") }) {
-                        Text("Iniciar reconocimiento facial")
-                    }
-
                 }
             }
         }
     }
-}
+

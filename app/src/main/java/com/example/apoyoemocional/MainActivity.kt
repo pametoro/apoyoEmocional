@@ -28,6 +28,8 @@ import com.example.apoyoemocional.viewModel.RespiraViewModel
 import java.net.URLDecoder
 import java.nio.charset.StandardCharsets
 import androidx.compose.runtime.collectAsState
+import androidx.navigation.NavType
+import androidx.navigation.navArgument
 
 
 class MainActivity : ComponentActivity() {
@@ -53,11 +55,16 @@ class MainActivity : ComponentActivity() {
                     composable("FormularioScreen") {
                         FormularioScreen(navController, usuarioViewModel)
                     }
-                    composable("PerfilScreen") {
-                        // Esta ruta se mantiene como un alias que apunta a ResumenScreen
-                        // Se actualiza para ser consistente con la ruta 'resumen' y pasar el nombre
-                        val nombreUsuario = usuarioViewModel.estado.collectAsState().value.nombre
-                        ResumenScreen(navController, usuarioViewModel, nombreUsuario)
+                    composable(
+                        route = "perfil/{nombreUsuario}",
+                        arguments = listOf(
+                            navArgument("nombreUsuario") {
+                                type = NavType.StringType
+                            }
+                        )
+                    ) { backStackEntry ->
+                        val nombreUsuario = backStackEntry.arguments?.getString("nombreUsuario") ?: "Invitado"
+                        PerfilScreen(navController, perfilViewModel, nombreUsuario)
                     }
 
                     // RUTA PRINCIPAL DE RESUMEN: Aquí navegamos a "emocion" y pasamos el nombre del usuario
@@ -69,10 +76,6 @@ class MainActivity : ComponentActivity() {
                     // NUEVA RUTA para el Reconocimiento Facial
                     composable("reconocimiento") {
                         RecFacialScreen(navController = navController, viewModel = recFacialViewModel)
-                    }
-
-                    composable("perfil") {
-                        PerfilScreen(navController, perfilViewModel)
                     }
 
                     // RUTA: Recibimos el nombre del usuario como argumento

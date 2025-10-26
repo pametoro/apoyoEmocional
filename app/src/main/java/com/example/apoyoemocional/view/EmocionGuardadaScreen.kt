@@ -64,7 +64,7 @@ fun EmocionGuardadaScreen(navController: NavController, nombreUsuario: String, e
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
                     Text(
-                        text = "Usuario dijo:",
+                        text = "mis pensamientos:",
                         style = MaterialTheme.typography.labelLarge,
                         color = Color.Gray
                     )

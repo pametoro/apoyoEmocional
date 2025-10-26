@@ -1,6 +1,7 @@
 package com.example.apoyoemocional.view
 
 import android.R.attr.navigationIcon
+import android.annotation.SuppressLint
 import android.graphics.BitmapFactory
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
@@ -21,6 +22,7 @@ import androidx.navigation.NavController
 import com.example.apoyoemocional.viewModel.RecFacialViewModel
 import com.google.mlkit.vision.common.InputImage
 import com.example.apoyoemocional.R
+@SuppressLint("LocalContextResourcesRead")
 @Composable
 fun RecFacialScreen(navController: NavController, viewModel: RecFacialViewModel) {
     val faces by viewModel.faces.collectAsState()
@@ -34,7 +36,6 @@ fun RecFacialScreen(navController: NavController, viewModel: RecFacialViewModel)
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // 🔙 Botón de retroceso
         Button(
             onClick = { navController.popBackStack() },
             modifier = Modifier.align(Alignment.Start)

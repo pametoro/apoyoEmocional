@@ -18,6 +18,7 @@ import java.nio.charset.StandardCharsets
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
+
 fun EmocionScreen(navController: NavController, viewModel: EmocionViewModel, nombre: String) {
     // CORRECCIÓN CLAVE: Usamos el argumento 'nombre' para inicializar el ViewModel
     LaunchedEffect(nombre) {
@@ -125,7 +126,7 @@ fun EmocionScreen(navController: NavController, viewModel: EmocionViewModel, nom
                     onClick = { navController.navigate("recursos") },
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    Text("Ver recursos emocionales")
+                    Text("Consejos")
 
 
                 }

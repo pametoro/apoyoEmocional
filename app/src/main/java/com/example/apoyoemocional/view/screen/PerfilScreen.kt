@@ -38,16 +38,10 @@ import java.util.Date
 import java.util.Locale
 
 @Composable
+fun PerfilScreen(navController: NavController, viewModel: PerfilViewModel, nombreUsuario: String) {
 
-fun PerfilScreen(navController: NavController, viewModel: PerfilViewModel){
     val context = LocalContext.current
     val imagenUri by viewModel.imagenUri.collectAsState()
-    val pickImageLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.GetContent()
-    ) { uri ->
-        viewModel.setImage(uri)
-    }
-
     var cameraUri by remember { mutableStateOf<Uri?>(null) }
 
     val takePictureLauncher = rememberLauncherForActivityResult(
@@ -66,6 +60,28 @@ fun PerfilScreen(navController: NavController, viewModel: PerfilViewModel){
             file
         )
     }
+
+    // Launcher para pedir el permiso de la cámara
+    val permissionLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestPermission()
+    ) { isGranted: Boolean ->
+        if (isGranted) {
+            // Si el permiso se concede, lanzamos la cámara
+            val uri = createImageUri(context)
+            cameraUri = uri
+            takePictureLauncher.launch(uri)
+        } else {
+            // Opcional: Mostrar un mensaje si el permiso es denegado
+        }
+    }
+
+    // Launcher para seleccionar imagen de la galería
+    val pickImageLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.GetContent()
+    ) { uri ->
+        viewModel.setImage(uri)
+    }
+
     val fondoPastel = Color(0xFFE3F2FD) // Azul cielo pastel
 
     Box(
@@ -86,7 +102,6 @@ fun PerfilScreen(navController: NavController, viewModel: PerfilViewModel){
             }
             Spacer(modifier = Modifier.height(10.dp))
 
-            Spacer(modifier = Modifier.height(10.dp))
 
             Button(onClick = {
                 when (PackageManager.PERMISSION_GRANTED) {
@@ -96,6 +111,7 @@ fun PerfilScreen(navController: NavController, viewModel: PerfilViewModel){
                         takePictureLauncher.launch(uri)
                     }
                     else -> {
+                        permissionLauncher.launch(Manifest.permission.CAMERA)
 
                     }
                 }
@@ -103,11 +119,15 @@ fun PerfilScreen(navController: NavController, viewModel: PerfilViewModel){
                 Text("Toma una foto con la cámara")
             }
             Spacer(modifier = Modifier.height(10.dp))
-            Button(onClick = {
-                navController.navigate("emocion")
-            }) {
+            Button(
+                onClick = {
+                    val nombre = "Pamela"
+                    navController.navigate("emocion/$nombre")
+                }
+            ) {
                 Text("Omitir")
             }
+
         }
     }
 }
