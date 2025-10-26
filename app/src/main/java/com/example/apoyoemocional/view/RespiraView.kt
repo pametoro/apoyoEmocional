@@ -1,26 +1,15 @@
 package com.example.apoyoemocional.view
 
 import android.net.Uri
+import androidx.compose.animation.core.*
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Button
-import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -29,8 +18,6 @@ import androidx.navigation.NavController
 import com.example.apoyoemocional.R
 import com.example.apoyoemocional.view.components.VideoPlayer
 import com.example.apoyoemocional.viewModel.RespiraViewModel
-
-
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -69,37 +56,74 @@ fun RespiraScreen(navController: NavController, viewModel: RespiraViewModel) {
                 painter = painterResource(id = R.drawable.descarga_yoga),
                 contentDescription = "persona haciendo yoga",
                 modifier = Modifier
-                    .size(280.dp)
-                    .padding(bottom = 25.dp))
+                    .size(180.dp)
+                    .padding(bottom = 25.dp)
+            )
 
             Text(
-                    text = "Respira profundamente y sigue las instrucciones del video",
-                    style = MaterialTheme.typography.bodyLarge,
-                    fontSize = 25.sp
-                )
+                text = "Respira profundamente y sigue las instrucciones del video",
+                style = MaterialTheme.typography.bodyLarge,
+                fontSize = 25.sp
+            )
 
-                Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(24.dp))
 
-                val videoUri = Uri.parse(estado.url)
+            RespiracionAnimada() // 🔄 Animación de respiración
 
-                VideoPlayer(
-                    videoUri = videoUri,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(220.dp)
-                )
+            Spacer(modifier = Modifier.height(24.dp))
+
+            val videoUri = Uri.parse(estado.url)
+
+            VideoPlayer(
+                videoUri = videoUri,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(220.dp)
+            )
+
             Spacer(modifier = Modifier.height(32.dp))
 
             Button(onClick = {
                 navController.navigate("inicio") {
-                    popUpTo(0) // Limpia el backstack para evitar volver atrás
+                    popUpTo(0)
                 }
             }) {
                 Text("Cerrar sesión")
             }
         }
-
     }
 }
 
+@Composable
+fun RespiracionAnimada() {
+    val infiniteTransition = rememberInfiniteTransition()
+    val scale by infiniteTransition.animateFloat(
+        initialValue = 1f,
+        targetValue = 1.3f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(durationMillis = 2000),
+            repeatMode = RepeatMode.Reverse
+        )
+    )
+
+    var texto by remember { mutableStateOf("Inhala") }
+
+    // Alterna el texto cada 2 segundos
+    LaunchedEffect(Unit) {
+        while (true) {
+            texto = if (texto == "Inhala") "Exhala" else "Inhala"
+            kotlinx.coroutines.delay(2000)
+        }
+    }
+
+    Box(
+        modifier = Modifier
+            .size(120.dp)
+            .scale(scale)
+            .background(Color(0xFFB3E5FC), shape = MaterialTheme.shapes.medium),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(texto, fontSize = 18.sp, color = Color.White)
+    }
+}
 

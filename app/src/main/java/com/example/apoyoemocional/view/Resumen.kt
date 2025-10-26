@@ -20,7 +20,7 @@ import androidx.navigation.NavController
 import com.example.apoyoemocional.viewModel.UsuarioViewModel
 
 @Composable
-fun ResumenScreen(navController: NavController, viewModel: UsuarioViewModel) {
+fun ResumenScreen(navController: NavController, viewModel: UsuarioViewModel, nombreUsuario: String) {
     val estado by viewModel.estado.collectAsState()
     val fondoPastel = Color(0xFFE3F2FD) // Azul cielo pastel
 
