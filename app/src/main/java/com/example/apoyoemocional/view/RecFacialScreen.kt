@@ -48,8 +48,6 @@ fun RecFacialScreen(navController: NavController, viewModel: RecFacialViewModel)
     val lifecycleOwner = LocalLifecycleOwner.current
     val cameraPermissionState = rememberPermissionState(Manifest.permission.CAMERA)
 
-
-
     LaunchedEffect(Unit) {
         cameraPermissionState.launchPermissionRequest()
     }
@@ -117,12 +115,11 @@ fun RecFacialScreen(navController: NavController, viewModel: RecFacialViewModel)
             Text("Se necesita permiso de cámara para continuar.",
                 color = Color.DarkGray)
         }
-
         Spacer(modifier = Modifier.height(50.dp))
-
         Button(
             onClick = {
-                navController.navigate("emocion") // Reemplaza "emocion" con la ruta real de tu siguiente pantalla
+                val nombreUsuario = ""
+                navController.navigate("emocion/$nombreUsuario")
             },
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF1976D2))
         ) {
@@ -130,3 +127,4 @@ fun RecFacialScreen(navController: NavController, viewModel: RecFacialViewModel)
         }
     }
 }
+

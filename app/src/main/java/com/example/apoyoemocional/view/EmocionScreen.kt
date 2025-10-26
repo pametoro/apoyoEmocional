@@ -98,7 +98,8 @@ fun EmocionScreen(navController: NavController, viewModel: EmocionViewModel, nom
                     label = { Text("Escribe tus emociones") },
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(200.dp)
+                        .height(200.dp),
+                    textStyle = LocalTextStyle.current.copy(color = Color.DarkGray)
                 )
 
                 Spacer(modifier = Modifier.height(24.dp))
@@ -137,8 +138,6 @@ fun EmocionScreen(navController: NavController, viewModel: EmocionViewModel, nom
                 }
             }
         }
-
-
     }
 }
 

@@ -120,9 +120,11 @@ fun FormularioScreen(
                     onCheckedChange = viewModel::onAceptarTerminosChange
                 )
                 Spacer(Modifier.width(8.dp))
-                Text("Acepto los términos y condiciones")
+                Text(
+                    text = "Acepto los términos y condiciones",
+                    color = Color.DarkGray
+                )
             }
-
             Button(
                 onClick = {
                     if (viewModel.validarFormulario()) {

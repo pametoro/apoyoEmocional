@@ -17,6 +17,7 @@ class RecFacialViewModel : ViewModel() {
         .setPerformanceMode(FaceDetectorOptions.PERFORMANCE_MODE_FAST)
         .build()
 
+
     private val detector = FaceDetection.getClient(detectorOptions)
 
     fun processImage(image: InputImage) {
